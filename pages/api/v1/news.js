@@ -2,6 +2,9 @@
 const { chromium } = require("playwright");
 
 export default function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  
   (async () => {
     const browser = await chromium.launch();
     const page = await browser.newPage();
