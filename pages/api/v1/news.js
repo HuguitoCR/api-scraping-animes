@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-const { chromium } = require("playwright");
+const { chromium } = require("playwright-chromium");
 
 export default function handler(req, res) {  
   (async () => {
-    const browser = await chromium.launch();
+    const browser = await chromium.launch({ chromiumSandbox: false });
     const page = await browser.newPage();
     await page.goto("https://somoskudasai.com/");
 

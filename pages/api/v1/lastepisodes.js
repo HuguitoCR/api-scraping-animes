@@ -1,11 +1,11 @@
-const { chromium } = require("playwright");
+const { chromium } = require("playwright-chromium");
 
 // scraping para obtener los ultimos Episodios agregados https://www.animefenix.com/
 // y guardarlas en un archivo json
 
 export default function handler(req, res) {
   (async () => {
-    const browser = await chromium.launch();
+    const browser = await chromium.launch({ chromiumSandbox: false });
     const page = await browser.newPage();
     await page.goto("https://www.animefenix.com/");
 
