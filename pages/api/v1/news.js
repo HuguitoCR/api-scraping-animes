@@ -1,41 +1,39 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-const { chromium } = require("playwright-chromium");
+
+
+
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 export default function handler(req, res) {  
-  (async () => {
-    const browser = await chromium.launch({ chromiumSandbox: false });
-    const page = await browser.newPage();
-    await page.goto("https://somoskudasai.com/");
 
-    const news = await page.evaluate(() => {
-      const noticias = [];
-      const newsContainer = document.querySelectorAll(
-        "div.news-list.dg.gg1.gt1.xs-gt2.md-gt3.xl-gt4.xl-gg2"
-      );
+ axios('https://somoskudasai.com/')
+  .then(response => {
+	
+    const datos =cheerio.load(response.data);
+    const populares = [];
+		const recientes = [];
+		const reviews = [];
 
-      newsContainer.forEach((newss) => {
-        newss.querySelectorAll("article.ar.por").forEach((item) => {
-          const title = item.querySelector(
-            "h2.ar-title.white-co.mab.fz4.lg-fz5"
-          ).innerText;
-          const link = item.querySelector("a.lnk-blk").href;
-          const image = item.querySelector(
-            "img.attachment-post-thumbnail.size-post-thumbnail.wp-post-image"
-          ).src;
+    datos('.ar-featured .swiper-slide', response.data).each(function(){
+			const title = datos(this).find('a').attr('aria-label');
+			const url = datos(this).find('a').attr('href');
+			populares.push({title, url});
+		});
 
-          noticias.push({
-            title,
-            link,
-            image,
-          });
-        });
-      });
+		datos('.news-list .ar', response.data).each(function(){
+			const title = datos(this).find('a').attr('aria-label');
+			const url = datos(this).find('a').attr('href');
+			recientes.push({title, url});
+		});
 
-      return noticias;
-    });
+		datos('.ar-reviews .swiper-slide', response.data).each(function(){
+			const title = datos(this).find('a').attr('aria-label');
+			const url = datos(this).find('a').attr('href');
+			reviews.push({title, url});
+		});
 
-    res.status(200).json({ news });
+    res.status(200).json({ recientes: recientes, populares: populares, reviews: reviews });
 
-    await browser.close();
-  })();
+  }).catch(err => console.log(err));
 }
