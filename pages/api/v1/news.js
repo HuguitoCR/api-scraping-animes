@@ -1,10 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const { chromium } = require("playwright");
 
-export default function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  
+export default function handler(req, res) {  
   (async () => {
     const browser = await chromium.launch();
     const page = await browser.newPage();
