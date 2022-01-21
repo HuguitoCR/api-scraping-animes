@@ -2,7 +2,8 @@
   "extends": "next/core-web-vitals",
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "modules": true
   },
   "parserOptions": {
     "ecmaVersion": "latest"
