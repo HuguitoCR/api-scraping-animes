@@ -4,37 +4,41 @@ const { chromium } = require("playwright");
 // y guardarlas en un archivo json
 
 export default function handler(req, res) {
+  (async () => {
+    const browser = await chromium.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.animefenix.com/");
 
-(async () => {
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-  await page.goto("https://www.animefenix.com/");
+    const UltimosEpisodios = await page.evaluate(() => {
+      const Episodios = [];
+      const EpisodiosContainer =
+        document.querySelectorAll("div.capitulos-grid");
 
-  const UltimosEpisodios = await page.evaluate(() => {
-    const Episodios = [];
-    const EpisodiosContainer = document.querySelectorAll("div.capitulos-grid");
-      
-    EpisodiosContainer.forEach(Epi => {
-        Epi.querySelectorAll("div.item").forEach(item => {
-             const id = item.querySelector("a").getAttribute("href").split("https://www.animefenix.com/")[1];
-             const title = item.querySelector("div.overtitle").innerText;
-             const image = item.querySelector("img").src;
-             const episodio = item.querySelector("div.overepisode.has-text-weight-semibold.is-size-7").innerText;
-             Episodios.push({
-                    id,
-                    title,
-                    image,
-                    episodio
-             });
-         });
-    });
+      EpisodiosContainer.forEach((Epi) => {
+        Epi.querySelectorAll("div.item").forEach((item) => {
+          const id = item
+            .querySelector("a")
+            .getAttribute("href")
+            .split("https://www.animefenix.com/")[1];
+          const title = item.querySelector("div.overtitle").innerText;
+          const image = item.querySelector("img").src;
+          const episodio = item.querySelector(
+            "div.overepisode.has-text-weight-semibold.is-size-7"
+          ).innerText;
+          Episodios.push({
+            id,
+            title,
+            image,
+            episodio,
+          });
+        });
+      });
 
-    return Episodios;
+      return Episodios;
     });
 
     res.status(200).json({ UltimosEpisodios });
 
-
-  await browser.close();
-})();
+    await browser.close();
+  })();
 }
