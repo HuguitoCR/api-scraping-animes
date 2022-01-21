@@ -1,12 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-
-
 const axios = require('axios');
 const cheerio = require('cheerio');
 
 export default function handler(req, res) {  
-
+ 
  axios('https://somoskudasai.com/')
   .then(response => {
 	
