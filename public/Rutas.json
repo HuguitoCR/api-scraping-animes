@@ -1,12 +1,15 @@
 {
-  "info": "buenas estas api esta en desarrollo",
-
-  "Ruta": "/api/v1/",
-
-
-  "contenido":{
-    "news": "news",
-    "lastepisodes": "lastepisodes"
-  }
-  
+	"info": "buenas estas api esta en desarrollo",
+	"Ruta": "/api/v1/",
+	"contenido": {
+		"news/{categoria}": [
+			"masNoticias",
+			"populares",
+			"recientes",
+			"reviews"
+		],
+		"anime/{opcion}": [
+			"lastEpisodes"
+		]
+	}
 }
