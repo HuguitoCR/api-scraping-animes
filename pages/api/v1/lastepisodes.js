@@ -10,7 +10,7 @@ export default function handler(req, res) {
 		const LastEpisodios = [];
 
 		datos('.capitulos-grid .item', response.data).each(function(){
-			const title = datos(this).find('div.overtitle').text().split('\n').join('').split(' ').join(' ');
+			const title = datos(this).find('div.overtitle').text().split('\n').join('');
 			const episodios = datos(this).find('div.overepisode').text().split('\n').join('') ;
       const url = datos(this).find('a').attr('href').split('https://www.animefenix.com/')[1];
       const imagen = datos(this).find('img').attr('src');
