@@ -9,7 +9,8 @@
 			"reviews"
 		],
 		"anime/{opcion}": [
-			"lastEpisodes"
+			"lastEpisodes",
+			"search?q={query}"
 		]
 	}
 }
