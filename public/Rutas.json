@@ -10,7 +10,8 @@
 		],
 		"anime/{opcion}": [
 			"lastEpisodes",
-			"search?q={query}"
+			"search?q={query}",
+			"moreInfo?q={id}"
 		]
 	}
 }
