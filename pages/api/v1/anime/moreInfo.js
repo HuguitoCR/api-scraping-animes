@@ -1,3 +1,5 @@
+import { children } from 'cheerio/lib/api/traversing';
+
 const axios = require('axios');
 const cheerio = require('cheerio');
 
@@ -20,7 +22,7 @@ export default function handler(req, res) {
 				}
 				const titulo = datos(this).find('h1.title').text();
 				const sinopsis = datos(this).find('p.sinopsis').text().replace(/\n/g, '').replace(/\"/g, '');
-				// const generos = datos(this).find('a.button.is-small').text().replace(' ', '').replace('Á', 'A').split(/(?=[A-Z])/).join(' ').replace('Angeles', 'Ángeles').split(' ');
+				const generos = datos(this).find('a.button.is-small').text().replace('Á', 'A').replace('Fic', 'fic').split(/(?=[A-Z])/).toString().replace('Ang', 'Áng').replace('fic', 'Fic').split(',');
 				const tipo = datos(this).find('ul.has-text-light').text().split('\n')[1].split(':')[1].trimStart();
 				const totalEpisodios = datos(this).find('ul.has-text-light').text().split('\n')[3].split(':')[1].trimStart();
 				info.push({ img, tipo, estado, totalEpisodios, siguienteEpisodio, titulo, sinopsis, generos });
