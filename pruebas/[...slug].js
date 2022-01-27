@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 export default function handler(req, res) {
 
 
-	const url = 'https://www.animefenix.com/animes?page=';
+	const url = `https://www.animefenix.com/animes?${req.query.q}`;
 	const Directorio = [];
 	const inicio = 1;
 
