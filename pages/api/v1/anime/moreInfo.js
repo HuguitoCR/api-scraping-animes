@@ -1,5 +1,3 @@
-import { children } from 'cheerio/lib/api/traversing';
-
 const axios = require('axios');
 const cheerio = require('cheerio');
 
@@ -29,8 +27,9 @@ export default function handler(req, res) {
 			});
 
 			datos('ul.anime-page__episode-list li', response.data).each(function() {
-				const eps = datos(this).find('a').attr('href').split('https://www.animefenix.com/')[1];
-				episodes.push(eps);
+				const episodio = parseInt(datos(this).find('a').children('span').text().split(' ')[1]);
+				const link = datos(this).find('a').attr('href').split('https://www.animefenix.com/ver/')[1];
+				episodes.push({ episodio, link });
 			});
 
 			res.status(200).json({ Anime: info[0], Episodios: episodes });
