@@ -19,7 +19,7 @@ export default function handler(req, res) {
 					siguienteEpisodio = null;
 				}
 				const titulo = datos(this).find('h1.title').text();
-				const sinopsis = datos(this).find('p.sinopsis').text().replace(/\n/g, '').replace(/\"/g, '');
+				const sinopsis = datos(this).find('p.sinopsis').text().replace(/\n/g, '');
 				const generos = datos(this).find('a.button.is-small').text().replace('Á', 'A').replace('Fic', 'fic').split(/(?=[A-Z])/).toString().replace('Ang', 'Áng').replace('fic', 'Fic').split(',');
 				const tipo = datos(this).find('ul.has-text-light').text().split('\n')[1].split(':')[1].trimStart();
 				const totalEpisodios = datos(this).find('ul.has-text-light').text().split('\n')[3].split(':')[1].trimStart();
