@@ -2,16 +2,17 @@
 	"info": "buenas estas api esta en desarrollo",
 	"Ruta": "/api/v1/",
 	"contenido": {
+		"anime/{opcion}": [
+			"lastEpisodes",
+			"search?q={query}",
+			"moreInfo?q={id}",
+			"verEpisodio/{id}"
+		],
 		"news/{categoria}": [
 			"masNoticias",
 			"populares",
 			"recientes",
 			"reviews"
-		],
-		"anime/{opcion}": [
-			"lastEpisodes",
-			"search?q={query}",
-			"moreInfo?q={id}"
 		]
 	}
 }
