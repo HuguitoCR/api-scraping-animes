@@ -1,7 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-
 export default function handler(req, res) {
 	return new Promise((resolve, reject) => {
 		axios('https://www.animefenix.com/')
