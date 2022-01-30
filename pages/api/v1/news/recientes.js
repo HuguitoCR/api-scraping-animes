@@ -13,7 +13,7 @@ export default function handler(req, res) {
 					const title = datos(this).find('a').attr('aria-label');
 					const img = datos(this).find('img').attr('src');
 					const url = datos(this).find('a').attr('href');
-					const fecha = datos(this).find('span.db').text();
+					const fecha = datos(this).find('span.db').text().trim();
 					recientes.push({ title, img, url, fecha });
 				});
 
