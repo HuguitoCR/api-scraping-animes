@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 	const reply = await client.get('lastEpisodes');
 
 	if (reply) {
-		res.status(200).send({ LastEpisodes: reply });
+		res.status(200).send({ LastEpisodios: reply });
 	}
 	else {
 		return new Promise((resolve, reject) => {
