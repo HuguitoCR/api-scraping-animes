@@ -12,6 +12,7 @@ export default async function handler(req, res) {
 }
 
 const callDirectorio = async () => {
+	const date = new Date();
 	const client = new Redis(process.env.REDIS_URL);
 	return new Promise((resolve, reject) => {
 		const url = 'https://www.animefenix.com/animes?page=';
@@ -44,6 +45,8 @@ const callDirectorio = async () => {
 				else {
 					client.set('directorio', JSON.stringify(Directorio));
 					client.quit();
+					console.clear();
+					console.log(`Direcotrio actualizado. Hora: ${date.getHours()}:${date.getMinutes()}`);
 					resolve();
 				}
 			};
