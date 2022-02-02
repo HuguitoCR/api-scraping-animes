@@ -1,16 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-// const redis = require('redis');
+
 const Redis = require('ioredis');
 
 export default async function handler(req, res) {
 	 const client = new Redis(process.env.REDIS_URL);
-	// const client = redis.createClient({
-	//   host: process.env.REDIS_HOST,
-	//   port: process.env.REDIS_PORT,
-	//   password: process.env.REDIS_PASSWORD,
-	// });
-
 
 	const reply = await client.get('lastEpisodes');
 		 if (reply) {
