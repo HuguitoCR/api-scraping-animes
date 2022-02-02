@@ -46,7 +46,7 @@ const callDirectorio = async () => {
 					client.set('directorio', JSON.stringify(Directorio));
 					client.quit();
 					console.clear();
-					console.log(`Direcotrio actualizado. Hora: ${date.getHours()}:${date.getMinutes()}`);
+					console.log(`Directorio actualizado. Hora: ${date.getHours()}:${date.getMinutes()}`);
 					resolve();
 				}
 			};
