@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 const Redis = require('ioredis');
 
 export default async function handler(req, res) {
-	 const client = new Redis('rediss://:d350726b41aa49288a88a9eeb791230f@us1-in-guppy-35832.upstash.io:35832');
+	 const client = new Redis(process.env.REDIS_URL);
 	// const client = redis.createClient({
 	//   host: process.env.REDIS_HOST,
 	//   port: process.env.REDIS_PORT,
