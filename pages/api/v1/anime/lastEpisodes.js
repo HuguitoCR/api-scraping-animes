@@ -4,13 +4,18 @@ const cheerio = require('cheerio');
 const Redis = require('ioredis');
 
 export default async function handler(req, res) {
-	 const client = new Redis(process.env.REDIS_URL);
+	 const client = new Redis(
+		{
+			'port': 6379,
+			'host': '127.0.0.1',
+		},
+	 );
 	// const client = redis.createClient({
 	//   host: process.env.REDIS_HOST,
 	//   port: process.env.REDIS_PORT,
 	//   password: process.env.REDIS_PASSWORD,
 	// });
-   	 client.connect();
+
 
 	const reply = await client.get('lastEpisodes');
 		 if (reply) {
@@ -30,7 +35,7 @@ export default async function handler(req, res) {
 						const imagen = datos(this).find('img').attr('src');
 						LastEpisodios.push({ title, episodios, url, imagen });
 					});
-					client.set('lastEpisodes', JSON.stringify(LastEpisodios), { EX: 1800 });
+					client.set('lastEpisodes', JSON.stringify(LastEpisodios), 'EX', 1800);
 					res.status(200).json({ LastEpisodios: LastEpisodios });
 					resolve();
 
@@ -42,5 +47,5 @@ export default async function handler(req, res) {
 				});
 		});
  	}
-	 client.quit();
+	client.quit();
 }
