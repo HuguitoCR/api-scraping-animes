@@ -1,14 +1,15 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const redis = require('redis');
-
+// const redis = require('redis');
+const Redis = require('ioredis');
 
 export default async function handler(req, res) {
-	const client = redis.createClient({
-	  host: process.env.REDIS_HOST,
-	  port: process.env.REDIS_PORT,
-	  password: process.env.REDIS_PASSWORD,
-	});
+	 const client = new Redis('rediss://:d350726b41aa49288a88a9eeb791230f@us1-in-guppy-35832.upstash.io:35832');
+	// const client = redis.createClient({
+	//   host: process.env.REDIS_HOST,
+	//   port: process.env.REDIS_PORT,
+	//   password: process.env.REDIS_PASSWORD,
+	// });
    	 client.connect();
 
 	const reply = await client.get('lastEpisodes');
