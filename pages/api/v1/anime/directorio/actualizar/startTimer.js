@@ -7,9 +7,16 @@ export default async function handler(req, res) {
 
 	// Actualiza el directorio
 	// se ejecuta cada 5 horas
-	callDirectorio();
-	setInterval(callDirectorio, 18000000);
+	setInterval(hola, 6000);
+	// callDirectorio();
+	// setInterval(callDirectorio, 18000000);
 }
+
+const hola = async () => {
+	const date = new Date();
+	console.clear();
+	console.log(`Hora: ${date.getHours()}:${date.getMinutes()}`);
+};
 
 const callDirectorio = async () => {
 	const date = new Date();
