@@ -3,11 +3,6 @@ const cheerio = require('cheerio');
 const Redis = require('ioredis');
 
 export default async function handler(req, res) {
-	callDirectorio();
-	res.status(200).json({ Mensaje: 'Directorio Actualizado' });
-}
-
-const callDirectorio = async () => {
 	const client = new Redis(process.env.REDIS_URL);
 	return new Promise((resolve, reject) => {
 		const url = 'https://www.animefenix.com/animes?page=';
@@ -49,5 +44,6 @@ const callDirectorio = async () => {
 			res.json(error);
 			resolve();
 		});
+		res.status(200).json({ Mensaje: 'Directorio Actualizado' });
 	});
-};
+}
