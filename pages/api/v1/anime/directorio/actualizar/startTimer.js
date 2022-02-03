@@ -36,6 +36,7 @@ export default async function handler(req, res) {
 					console.log('Directorio Actualizado');
 					client.set('directorio', JSON.stringify(Directorio));
 					client.quit();
+					res.status(200).json({ Mensaje: 'Directorio Actualizado' });
 					resolve();
 				}
 			};
@@ -45,6 +46,6 @@ export default async function handler(req, res) {
 			res.json(error);
 			resolve();
 		});
-		res.status(200).json({ Mensaje: 'Directorio Actualizado' });
+
 	});
 }
