@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 	// Actualiza el directorio
 	// se ejecuta cada 5 horas
 	res.status(200).json({ Mensaje: 'Directorio Actualizado' });
-	setInterval(callDirectorio(), 30000);
+	setInterval(callDirectorio, 30000);
 	console.log('Timer Iniciado');
 	// res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
 }
