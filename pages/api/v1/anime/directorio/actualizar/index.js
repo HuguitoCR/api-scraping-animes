@@ -38,10 +38,10 @@ export default async function handler(req, res) {
 					getAnimes(page + 1);
 				}
 				else {
-					console.log('Directorio Actualizado');
+
 					client.set('directorio', JSON.stringify(Directorio));
 					client.quit();
-
+					console.log('Directorio Actualizado');
 					resolve();
 				}
 			};
