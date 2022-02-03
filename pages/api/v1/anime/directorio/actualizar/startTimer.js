@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 	// res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
 }
 
-const callDirectorio = async () => {
+const callDirectorio = () => {
 	const date = new Date();
 	const client = new Redis(process.env.REDIS_URL);
 	return new Promise((resolve, reject) => {
