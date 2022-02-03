@@ -3,11 +3,11 @@ const cheerio = require('cheerio');
 const Redis = require('ioredis');
 
 export default async function handler(req, res) {
-	const client = new Redis(process.env.REDIS_URL);
+	// const client = new Redis(process.env.REDIS_URL);
 	// Actualiza el directorio
 	// se ejecuta cada 5 horas
 	res.status(200).json({ Mensaje: 'Directorio Actualizado' });
-	client.quit();
+	// client.quit();
 	setInterval(callDirectorio, 30000);
 	console.log('Timer Iniciado');
 	// res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
@@ -47,7 +47,6 @@ const callDirectorio = () => {
 				else {
 					client.set('directorio', JSON.stringify(Directorio));
 					client.quit();
-					console.clear();
 					console.log(`Directorio actualizado. Hora: ${date.getHours()}:${date.getMinutes()}`);
 					resolve();
 				}
