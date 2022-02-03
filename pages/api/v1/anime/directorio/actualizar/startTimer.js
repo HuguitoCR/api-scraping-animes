@@ -6,16 +6,15 @@ export default async function handler(req, res) {
 	// Actualiza el directorio
 	// se ejecuta cada 5 horas
 	// setInterval(hola, 3000);
-	 callDirectorio();
-	 setInterval(callDirectorio, 3000);
-	res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
+	// res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
+	console.log('Hola vercel');
 }
 
-// const hola = async () => {
-// 	const date = new Date();
-// 	console.clear();
-// 	console.log(`Hora: ${date.getHours()}:${date.getMinutes()}`);
-// };
+const hola = async () => {
+	const date = new Date();
+	console.clear();
+	console.log(`Hora: ${date.getHours()}:${date.getMinutes()}`);
+};
 
 const callDirectorio = async () => {
 	const date = new Date();
