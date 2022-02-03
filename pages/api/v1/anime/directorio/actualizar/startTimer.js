@@ -5,9 +5,9 @@ const Redis = require('ioredis');
 export default async function handler(req, res) {
 	// Actualiza el directorio
 	// se ejecuta cada 5 horas
+	await callDirectorio();
 	// setInterval(hola, 3000);
 	// res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
-	console.log('Hola vercel');
 }
 
 const hola = async () => {
