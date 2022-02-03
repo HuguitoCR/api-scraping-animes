@@ -30,15 +30,13 @@ export default async function handler(req, res) {
 					Directorio.push({ id, title, imagen, año, estado, tipo, descripcion });
 				});
 
-				if (page == 12) {
-					res.status(200).json('Directorio Actualizado');
-				}
 
 				if (page < $paginacion) {
 					getAnimes(page + 1);
 				}
 				else {
 					client.set('directorio', JSON.stringify(Directorio));
+					res.status(200).json('Directorio Actualizado');
 					client.quit();
 					resolve();
 				}
