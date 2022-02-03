@@ -7,6 +7,7 @@ export default async function handler(req, res) {
 	// se ejecuta cada 5 horas
 	await callDirectorio();
 	// setInterval(hola, 3000);
+	res.status(200).send({ Mensaje: 'Directorio Actualizado' });
 	// res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
 }
 
