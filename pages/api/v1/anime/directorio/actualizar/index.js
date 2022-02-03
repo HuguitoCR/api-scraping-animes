@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const Redis = require('ioredis');
 
 export default async function handler(req, res) {
-	res.status(200).json('Actualizado Directorio');
+
 	const client = new Redis(process.env.REDIS_URL);
 	return new Promise((resolve, reject) => {
 		const url = 'https://www.animefenix.com/animes?page=';
@@ -30,18 +30,16 @@ export default async function handler(req, res) {
 					Directorio.push({ id, title, imagen, año, estado, tipo, descripcion });
 				});
 
-				// if (page == 24) {
-				// 	res.status(200).json('Directorio Actualizado');
-				// }
+				if (page == 12) {
+					res.status(200).json('Directorio Actualizado');
+				}
 
 				if (page < $paginacion) {
 					getAnimes(page + 1);
 				}
 				else {
-
 					client.set('directorio', JSON.stringify(Directorio));
 					client.quit();
-					console.log('Directorio Actualizado');
 					resolve();
 				}
 			};
