@@ -4,17 +4,16 @@ const Redis = require('ioredis');
 
 export default async function handler(req, res) {
 	const client = new Redis(process.env.REDIS_URL);
-	// Actualiza el directorio
-	// se ejecuta cada 5 horas
 	res.status(200).json({ Mensaje: 'Directorio Actualizado' });
 	client.quit();
-	setInterval(callDirectorio, 30000);
-	console.log('Timer Iniciado');
+
+	setInterval(callDirectorio, 40000);
+	// Actualiza el directorio
+	// se ejecuta cada 5 horas
 	// res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
 }
 
-const callDirectorio = () => {
-	const date = new Date();
+const callDirectorio = async () => {
 	const client = new Redis(process.env.REDIS_URL);
 	return new Promise((resolve, reject) => {
 		const url = 'https://www.animefenix.com/animes?page=';
@@ -47,7 +46,6 @@ const callDirectorio = () => {
 				else {
 					client.set('directorio', JSON.stringify(Directorio));
 					client.quit();
-					console.log(`Directorio actualizado. Hora: ${date.getHours()}:${date.getMinutes()}`);
 					resolve();
 				}
 			};
