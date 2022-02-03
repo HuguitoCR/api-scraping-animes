@@ -4,6 +4,7 @@ const Redis = require('ioredis');
 
 export default async function handler(req, res) {
 	const client = new Redis(process.env.REDIS_URL);
+	const i = 0;
 	return new Promise((resolve, reject) => {
 		const url = 'https://www.animefenix.com/animes?page=';
 		const Directorio = [];
@@ -29,16 +30,12 @@ export default async function handler(req, res) {
 					Directorio.push({ id, title, imagen, año, estado, tipo, descripcion });
 				});
 
+				if (page = 48) {
+					res.status(200).json('Directorio Actualizado');
+				}
+
 				if (page < $paginacion) {
-
-					if (page = 100) {
-						getAnimes(page + 1);
-						res.status(200).json({ Mensaje: 'Directorio Actualizado' });
-					}
-					else {
-						getAnimes(page + 1);
-					}
-
+					getAnimes(page + 1);
 				}
 				else {
 					console.log('Directorio Actualizado');
