@@ -3,20 +3,19 @@ const cheerio = require('cheerio');
 const Redis = require('ioredis');
 
 export default async function handler(req, res) {
-	res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
-
 	// Actualiza el directorio
 	// se ejecuta cada 5 horas
-	setInterval(hola, 6000);
-	// callDirectorio();
-	// setInterval(callDirectorio, 18000000);
+	// setInterval(hola, 3000);
+	 callDirectorio();
+	 setInterval(callDirectorio, 3000);
+	res.status(200).send({ Mensaje: 'Temporizador iniciado, El directorio se actualizara cada 5 horas' });
 }
 
-const hola = async () => {
-	const date = new Date();
-	console.clear();
-	console.log(`Hora: ${date.getHours()}:${date.getMinutes()}`);
-};
+// const hola = async () => {
+// 	const date = new Date();
+// 	console.clear();
+// 	console.log(`Hora: ${date.getHours()}:${date.getMinutes()}`);
+// };
 
 const callDirectorio = async () => {
 	const date = new Date();
