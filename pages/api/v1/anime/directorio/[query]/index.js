@@ -3,10 +3,9 @@ const cheerio = require('cheerio');
 
 export default function handler(req, res) {
 	return new Promise((resolve, reject) => {
-		const url = `https://www.animefenix.com/animes?${req.query.query}`;
+		const url = `https://www.animefenix.com/animes?${req.query.query}&page=`;
 		const Directorio = [];
 		const inicio = 1;
-		let contador = 0;
 
 		const getData = async () => {
 			const response = await axios(url + inicio);
@@ -28,24 +27,11 @@ export default function handler(req, res) {
 					Directorio.push({ id, title, imagen, año, estado, tipo, descripcion });
 				});
 
-				if (contador < 3) {
-					if (page < $paginacion) {
-						contador++;
-						getAnimes(page + 1);
-					}
-					else {
-						res.status(200).json({ Anterior:`https://api-torii.vercel.app/api/v1/anime/directorio/${req.query.query}&page=${(page - 3)}`,
-							Directorio: Directorio });
-						contador = 0;
-						resolve();
-					}
+				if (page < $paginacion) {
+					getAnimes(page + 1);
 				}
 				else {
-					res.status(200)
-						.json({ Siguiente: `https://api-torii.vercel.app/api/v1/anime/directorio/${req.query.query}&page=${(page + 1)}`,
-							Anterior:`https://api-torii.vercel.app/api/v1/anime/directorio/${req.query.query}&page=${(page - 3)}`,
-							Directorio: Directorio });
-					contador = 0;
+					res.status(200).json({ Directorio : Directorio });
 					resolve();
 				}
 			};
