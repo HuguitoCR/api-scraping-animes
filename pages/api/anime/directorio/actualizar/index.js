@@ -22,12 +22,12 @@ export default async function handler(req, res) {
 				HTML('.list-series .serie-card', respu.data).each(function() {
 					const id = HTML(this).find('a').attr('href').split('https://www.animefenix.com/')[1];
 					const title = HTML(this).find('a.has-text-orange').text().split('\n').join('');
-					const imagen = HTML(this).find('img').attr('src');
+					const img = HTML(this).find('img').attr('src');
 					const año = HTML(this).find('span.year').text();
 					const estado = HTML(this).find('span.is-orange').text();
 					const tipo = HTML(this).find('span.type').text();
 					const descripcion = HTML(this).find('p').text().split('\n').join('').split('"').join('');
-					Directorio.push({ id, title, imagen, año, estado, tipo, descripcion });
+					Directorio.push({ id, title, img, año, estado, tipo, descripcion });
 				});
 
 
